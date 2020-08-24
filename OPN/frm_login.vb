@@ -108,7 +108,7 @@ Public Class frm_login
             usuario_perfil = False
             'ACESSO AO BANCO TOTVS
             'Dim linhaTexto2 As String = "Data Source=GCTOTVS01;Initial Catalog=tmPRD2;User ID=totvs;Password=totvs;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
-            Dim linhaTexto2 As String = "Data Source=gctotvs02\protheus12;Initial Catalog=P12OFICIAL;User ID=operacoes;Password=operacoes;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
+            Dim linhaTexto2 As String = "Data Source=gctotvs03;Initial Catalog=P12OFICIAL;User ID=totvs;Password=totvs;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
             TratadorDeConexao.Preparar2(linhaTexto2)
             Dim checkconexao2 = TratadorDeConexao.Abrir2()
             If checkconexao2 = False Then
