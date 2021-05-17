@@ -169,6 +169,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AS.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="AS.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -182,64 +188,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\images.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images01.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images02.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images06.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images07.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images03.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images04.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images031.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images08.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images09.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images11.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images111.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images12.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images13.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images14.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images15.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images151.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images152.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images16.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images17.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo SAM32X32.ico" />
@@ -255,6 +203,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
