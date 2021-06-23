@@ -233,12 +233,15 @@ Public Class frm_as_cadastro
     Private Sub bnt_cadastro_Click(sender As Object, e As EventArgs) Handles bnt_cadastro.Click
         Try
             Cursor.Current = Cursors.WaitCursor
-
-
-
+            Dim _campos As String = "Z01_NUMERO,Z01_DESCRI,Z01_CLIENT,R_E_C_N_O_"
+            Dim _VALORES As String = "'" & Trim(txt_cod_AS.Text).PadLeft(6, "0") & "','" & Trim(tx_as_07.Text) & "','" & cod_cliente_totvs.ToString().PadLeft(6, "0") & "','" & Trim(txt_cod_AS.Text) & "'"
+            Dim _CAMPOS_VALORES As String = "Z01_DESCRI='" & Trim(tx_as_07.Text) & "',Z01_CLIENT='" & cod_cliente_totvs.ToString().PadLeft(6, "0") & "',R_E_C_N_O_='" & Trim(txt_cod_AS.Text) & "',Z01_NUMERO='" & Trim(txt_cod_AS.Text).PadLeft(6, "0") & "'"
 
             Dim Con As SqlConnection = TratadorDeConexao.Conexao()
+            Dim Con3 As SqlConnection = TratadorDeConexao.Conexao2()
+
             Dim SQDR_as As SqlDataReader
+            Dim SQASTOTVS As SqlDataReader
             'Dim SQDR_max As SqlDataReader
 
             If Val(cod_status_as) <= 0 Then
@@ -251,32 +254,32 @@ Public Class frm_as_cadastro
             SQDR_as = SQCMDAS.ExecuteReader(CommandBehavior.Default)
             If SQDR_as.Read Then
 
-                'Dim CmdUP_as As New SqlCommand("Update [AS] Set as_data_abertura='" & Trim(tx_as_01.Text) & "',as_centro_custo='" & Trim(lbl_descricao.Text) & "',as_contrato_pedido='" & Trim(tx_as_06.Text) & "',as_inicio_contrato='" & Trim(DateTimePicker1.Text) & "',as_fim_contrato='" & Trim(DateTimePicker2.Text) & "',as_objeto='" & Trim(tx_as_07.Text) & "',as_prazo_execucao='" & Trim(tx_as_08.Text) & "',as_doc_referencia='" & Trim(tx_as_09.Text) & "',as_obs='" & Trim(tx_as_10.Text) & "',as_cliente_totvs=" & cod_cliente_totvs & ",opn_codigo=" & cod_edit_OPN & ",as_status=" & cod_status_as & ",as_cliente_ccusto='" & Trim(cmb_ccusto.Text) & "' Where as_codigo= " & Trim(txt_cod_AS.Text) & "", Con)
                 Dim CmdUP_as As New SqlCommand("Update [AS] Set as_data_abertura='" & Trim(tx_as_01.Text) & "',as_centro_custo='" & Trim(lbl_descricao.Text) & "',as_contrato_pedido='" & Trim(tx_as_06.Text) & "',as_inicio_contrato='" & Trim(DateTimePicker1.Text) & "',as_fim_contrato='" & Trim(DateTimePicker2.Text) & "',as_objeto='" & Trim(tx_as_07.Text) & "',as_prazo_execucao='" & Trim(tx_as_08.Text) & "',as_doc_referencia='" & Trim(tx_as_09.Text) & "',as_obs='" & Trim(tx_as_10.Text) & "',as_cliente_totvs=" & cod_cliente_totvs & ",opn_codigo=" & cod_edit_OPN & ",as_status=" & cod_status_as & ",as_descricao_ccusto2='" & Trim(cmb_ccusto.Text) & "'  Where as_codigo= " & Trim(txt_cod_AS.Text) & "", Con)
                 CmdUP_as.ExecuteNonQuery() : CmdUP_as.Dispose()
 
-                '    ExibeDados(frm_principal.DG, "Select * From Lista_OPN Order By Prioridade", "Lista_OPN")
-                '    frm_principal.chk_f_01.Checked = True : frm_principal.chk_f_02.Checked = False : frm_principal.chk_f_03.Checked = False : frm_principal.chk_f_04.Checked = False
-                '    ' MsgBox("Registro alterado com êxito!", MsgBoxStyle.Information, titulo)
+
+                'Verifica se a AS foi criada no Totvs para atualizar ou inserir
+                Dim QUERYTOTVS As New SqlCommand("Select * From [Z01010] Where Z01_NUMERO= " & Trim(txt_cod_AS.Text).PadLeft(6, "0") & "", Con3)
+                SQASTOTVS = QUERYTOTVS.ExecuteReader(CommandBehavior.Default)
+
+                If SQASTOTVS.Read Then
+                    Dim CmdUP_as_TOTVS As New SqlCommand("Update [Z01010] Set " & _CAMPOS_VALORES & " Where Z01_NUMERO= " & Trim(txt_cod_AS.Text).PadLeft(6, "0") & "", Con3)
+                    CmdUP_as_TOTVS.ExecuteNonQuery() : CmdUP_as_TOTVS.Dispose()
+                Else
+                    Dim CmdIns_as_TOTVS As New SqlCommand("Insert into Z01010 ( " & _campos & " ) values ( " & _VALORES & " )", Con3)
+                    CmdIns_as_TOTVS.ExecuteNonQuery() : CmdIns_as_TOTVS.Dispose()
+                End If
+
 
             Else
-                Try
-
-
-
-                    'Dim CmdIns_as As New SqlCommand("Insert into [AS](as_data_abertura,as_centro_custo,as_contrato_pedido,as_inicio_contrato,as_fim_contrato,as_objeto,as_prazo_execucao,as_doc_referencia,as_obs,as_cliente_totvs,opn_codigo,as_status,as_codigo,as_cliente_ccusto) values ('" & Trim(tx_as_01.Text) & "','" & Trim(lbl_descricao.Text) & "','" & Trim(tx_as_06.Text) & "','" & Trim(DateTimePicker1.Text) & "','" & Trim(DateTimePicker2.Text) & "','" & Trim(tx_as_07.Text) & "','" & Trim(tx_as_08.Text) & "','" & Trim(tx_as_09.Text) & "','" & Trim(tx_as_10.Text) & "'," & cod_cliente_totvs & "," & cod_edit_OPN & "," & cod_status_as & "," & Val(txt_cod_AS.Text) & ",'" & Trim(cmb_ccusto.Text) & "')", Con)
+                    Try
                     Dim CmdIns_as As New SqlCommand("Insert into [AS](as_data_abertura,as_centro_custo,as_contrato_pedido,as_inicio_contrato,as_fim_contrato,as_objeto,as_prazo_execucao,as_doc_referencia,as_obs,as_cliente_totvs,opn_codigo,as_status,as_codigo,as_descricao_ccusto2) values ('" & Trim(tx_as_01.Text) & "','" & Trim(lbl_descricao.Text) & "','" & Trim(tx_as_06.Text) & "','" & Trim(DateTimePicker1.Text) & "','" & Trim(DateTimePicker2.Text) & "','" & Trim(tx_as_07.Text) & "','" & Trim(tx_as_08.Text) & "','" & Trim(tx_as_09.Text) & "','" & Trim(tx_as_10.Text) & "'," & cod_cliente_totvs & "," & cod_edit_OPN & "," & cod_status_as & "," & Val(txt_cod_AS.Text) & ",'" & Trim(cmb_ccusto.Text) & "')", Con)
                     CmdIns_as.ExecuteNonQuery() : CmdIns_as.Dispose()
 
-                    '        'txt_01.Text = ""
-                    '        'txt_02.Text = ""
-                    '        'txt_03.Text = ""
-                    '        'mask_txt_04.Text = ""
-                    '        'txt_05.Text = ""
-                    '        'txt_06.Text = ""
-                    '        'txt_08.Text = ""
-                    '        'txt_09.Text = ""
-                    '        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                    Dim CmdIns_as_TOTVS As New SqlCommand("Insert into Z01010 ( " & _campos & " ) values ( " & _VALORES & " )", Con3)
+                    CmdIns_as_TOTVS.ExecuteNonQuery() : CmdIns_as_TOTVS.Dispose()
+
+                    ' '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                     '        ExibeDados(frm_principal.DG, "Select * From Lista_OPN Order By Prioridade", "Lista_OPN")
                     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                 Catch ex As Exception
