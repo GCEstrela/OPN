@@ -108,7 +108,8 @@ Public Class frm_login
             usuario_perfil = False
             'ACESSO AO BANCO TOTVS
             'Dim linhaTexto2 As String = "Data Source=GCTOTVS01;Initial Catalog=tmPRD2;User ID=totvs;Password=totvs;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
-            Dim linhaTexto2 As String = "Data Source=gctotvs03;Initial Catalog=P12OFICIAL;User ID=totvs;Password=totvs;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
+            'Dim linhaTexto2 As String = "Data Source=gctotvs03;Initial Catalog=P12OFICIAL;User ID=totvs;Password=totvs;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
+            Dim linhaTexto2 As String = "Data Source=sql\totvsdb;Initial Catalog=Protheus_PRD;User ID=integracao_opn;Password=bMMYFAOv6X6A0VgtInM4;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
             TratadorDeConexao.Preparar2(linhaTexto2)
             Dim checkconexao2 = TratadorDeConexao.Abrir2()
             If checkconexao2 = False Then
@@ -125,7 +126,8 @@ Public Class frm_login
             ''Sempre é a primeira linha do arquivo txt.
             'Dim writer As New StreamReader(configacao)
             'Dim linhaTexto As String = writer.ReadLine()
-            Dim linhaTexto As String = "Data Source=GCSERVER;Initial Catalog=OPN;User ID=sa;Password=050382;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
+            Dim linhaTexto As String = "Data Source=sql\grupoestreladb;Initial Catalog=GE_OPN;User ID=opn;Password=bMMYFAOv6X6A0VgtInM4;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
+            'Dim linhaTexto As String = "Data Source=GCSERVER;Initial Catalog=OPN;User ID=sa;Password=050382;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
             'Dim linhaTexto As String = "Data Source=GCTEC04\SQLEXPRESS;Initial Catalog=OPN;User ID=Sam;Password=sammas;Min Pool Size=5;Max Pool Size=15;Connection Reset=True;Connection Lifetime=600;Trusted_Connection=no;MultipleActiveResultSets=True"
             TratadorDeConexao.Preparar(linhaTexto)
             ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
